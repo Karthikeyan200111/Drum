@@ -4,20 +4,21 @@ const KeyBoardKey = ({
   play,
   sound: { id, key, url, keyCode },
 }) => {
-  const handleKeyDown = (e) => {
-    if (keyCode === e.keyCode) {
-      if (url !== '') {
-        play(key, id);
-      }
-    }
-  };
+  
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (keyCode === e.keyCode) {
+        if (url !== '') {
+          play(key, id);
+        }
+      }
+    };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [keyCode, play, url, key, id]);
 
   const handleClick = () => {
     if (url !== '') {
